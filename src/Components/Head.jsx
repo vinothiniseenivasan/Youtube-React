@@ -1,6 +1,14 @@
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { changeToggleBar } from '../utils/navBarSlice';
 
 const Head = () => {
+
+
+  const navBarStatus = useSelector((store)=> store.navBar.toggleBar);
+
+  const dispatch = useDispatch();
+  console.log("navBarStatus" ,navBarStatus)
 
     // it has 3 sections 
     //  navbar 
@@ -12,13 +20,15 @@ const Head = () => {
 
 
          <div className='flex items-center col-span-4  sm:col-span-1 '>
-         {/*   navbar 
-               youtube logo */}
+        
+               {/*  navbar  */}
             <img 
+             onClick={()=>{dispatch(changeToggleBar())}}
             className='h-14'
             src="https://th.bing.com/th?id=OIP.Au0_7mpqZMtQeoRL4iFkqAHaHa&w=250&h=250&c=8&rs=1&qlt=90&o=6&dpr=1.6&pid=3.1&rm=2" alt="hamburger-menu" />
+            {/*  youtube logo  */}
             <img
-            className=' w-[10rem]  h-[8rem] sm:w-28 sm:h-28 ml-3'
+            className=' w-[10rem]  h-[8rem] sm:w-28 sm:h-[6rem] ml-3'
             src="https://logodownload.org/wp-content/uploads/2014/10/youtube-logo-0.png"
             alt='youtube-logo'/>
 
