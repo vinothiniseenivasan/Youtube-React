@@ -4,7 +4,7 @@ const navBarSlice = createSlice(
     {
         name: "navbar" ,
         initialState:{
-            toggleBar: false,
+            toggleBar: true,
         },
         reducers:{
             changeToggleBar :(state,action)=>{

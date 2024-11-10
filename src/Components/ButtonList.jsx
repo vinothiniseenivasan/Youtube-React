@@ -1,9 +1,12 @@
 import React from 'react'
+import Button from './Button'
 
 const ButtonList = () => {
   return (
-    <div>ButtonList</div>
-  )
+    <div>
+       <Button />
+    </div>
+    )
 }
 
 export default ButtonList
