@@ -8,14 +8,14 @@ const Head = () => {
   const navBarStatus = useSelector((store)=> store.navBar.toggleBar);
 
   const dispatch = useDispatch();
-  console.log("navBarStatus" ,navBarStatus)
+  // console.log("navBarStatus" ,navBarStatus)
 
     // it has 3 sections 
     //  navbar 
     // serach bar
     //  user icon
   return (
-    <div className='grid grid-flow-col shadow-xl place-items-center'>
+    <div className=' fixed grid grid-flow-col shadow-xl place-items-center w-full  bg-white'>
 
 
 

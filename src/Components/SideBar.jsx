@@ -12,7 +12,7 @@ const SideBar = () => {
    ( navBarStatus &&
     //
     // w-[8rem]  sm:w-[12rem] md:w-[15rem]
-    <div className=' md:w-[12rem]  lg:w-[15rem] w-[8rem]  sm:w-[12rem]   shadow-lg p-3 h-screen overflow-y-auto cursor-pointer'>
+    <div className='fixed md:w-[12rem]  lg:w-[15rem] w-[8rem]  sm:w-[12rem]   shadow-lg p-3 h-screen overflow-y-auto cursor-pointer mt-28'>
      <ul>
         {
             sidebarObj.map((eachSideBar,index  )=>(

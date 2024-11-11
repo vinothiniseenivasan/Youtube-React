@@ -3,7 +3,7 @@ import Button from './Button'
 
 const ButtonList = () => {
   return (
-    <div>
+    <div className='cursor-pointer '>
        <Button />
     </div>
     )
