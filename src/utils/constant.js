@@ -1,4 +1,4 @@
-const GOOGLE_API_KEY = "AIzaSyCiabuoMTlguZwWCM_J_GZK4dyCWrvZ2-k";
+export const GOOGLE_API_KEY = "AIzaSyCAz2fl8eUFaIcdIWx1nqkO7Wjd8eZw4q8";
 
 
 export const YOUTUBE_VIDEOS_API =
@@ -6,7 +6,14 @@ export const YOUTUBE_VIDEOS_API =
   GOOGLE_API_KEY;
 
 
-//   Go to the Google Cloud Console.
+ 
+  export const YOUTUBE_VIDEOINFO_BYID =    "https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id="
+
+
+
+   // export const YOUTUBE_VIDEOINFO_BYID = "https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id=qlJjPV3PBUA&key=" + GOOGLE_API_KEY;
+
+//   Go to the Google Cloud .
 // Select your project.
 // Navigate to APIs & Services > Library.
 // Search for "YouTube Data API v3" and ensure that it is enabled for your project. After enabling it worked for me

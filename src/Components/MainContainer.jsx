@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 const MainContainer = () => {
 
   const navBarStatus = useSelector((store)=> store.navBar.toggleBar);
-  console.log("navBarStatus",navBarStatus)
+  // console.log("navBarStatus",navBarStatus)
   return (
     // w-[60%] 
 

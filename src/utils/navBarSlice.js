@@ -9,6 +9,10 @@ const navBarSlice = createSlice(
         reducers:{
             changeToggleBar :(state,action)=>{
                 state.toggleBar = !state.toggleBar
+            } ,
+
+            closeNavBar :(state ,action)=>{
+                state.toggleBar = false;
             }
 
         }
@@ -20,4 +24,4 @@ const navBarSlice = createSlice(
 
 export default navBarSlice.reducer;
 
-export const {changeToggleBar} = navBarSlice.actions;
+export const {changeToggleBar,closeNavBar} = navBarSlice.actions;

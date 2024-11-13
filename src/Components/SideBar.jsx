@@ -1,6 +1,7 @@
 import React from 'react';
 import { sidebarObj } from '../Objects/sidebarObj';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const SideBar = () => {
     
@@ -26,22 +27,31 @@ const SideBar = () => {
                    <h1 className="text-[1.1rem] font-medium tracking-wide leading:[1.5rem] sm:leading-[2rem] mb-3 opacity-8s0  cursor-pointer "> {eachSideBar.title+ " " + ">"} </h1>}
 
                             { 
-                             eachSideBar.items.map((eachSubTitle , index)=>(
-                               
+                             eachSideBar.items.map( (eachSubTitle , index)=>(
+
+                            
+
+                              <Link to={eachSubTitle.label === "Home" ? "/" : " "}>
+                                   {/* {console.log("eachSubTitle" ,eachSubTitle)} */}
+                             
                           <div key={index} className='flex justify-start items-center leading-[1.8rem]  sm:leading-[2.2rem] cursor-pointer'>
-                                  {/* img logo */}
-                                    <div className=''>
-                                         <img src={eachSubTitle.img} alt="logo" className='w-6 h-6' />
-                                    </div>
-      
-      
-                                   {/* // subtitle */}
-                                  <h3 className=' ml-4 sm:ml-6 text-gray-600 font-light sm:font-normal tracking-normal  sm:tracking-wide  '>
-                                      {eachSubTitle.label}
-                                  </h3>
-                           
-                            </div>
-                           ))}
+                            {/* img logo */}
+                              <div className=''>
+                                   <img src={eachSubTitle.img} alt="logo" className='w-6 h-6' />
+                              </div>
+
+
+                             {/* // subtitle */}
+                            <h3 className=' ml-4 sm:ml-6 text-gray-600 font-light sm:font-normal tracking-normal  sm:tracking-wide  '>
+                                {eachSubTitle.label}
+                            </h3>
+                     
+                          </div>
+                          </Link>
+                          
+                           ))
+                           }
+        
                         
                       
                       

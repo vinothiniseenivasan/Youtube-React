@@ -12,6 +12,11 @@ function App() {
   const appRouter=createBrowserRouter([{
     path:"/",
     element:<Body /> ,
+    // body has 2 children
+    //  1.sidebar
+    // 2.navigate according to url 1.watchPage 2. mainContainer
+
+
     children:[
       {
         path: "/" ,

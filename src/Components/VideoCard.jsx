@@ -1,5 +1,6 @@
 import React from 'react';
 import useGetTime from '../Objects/useGetTime';
+import { Link } from 'react-router-dom';
 
 const VideoCard = ({videoInfo}) => {
 
@@ -34,7 +35,7 @@ const VideoCard = ({videoInfo}) => {
   return (
 
   
-    <div className='  custom-lg:w-[300px] custom-sm-md:w-[340px]   custom-md:w-[270px]  custom-md:mr-auto shadow-lg  m-1 p-[0.40rem] cursor-pointer  '>
+    <div className='custom-lg:ml-6 h-[320px]  custom-lg:w-[360px] custom-sm-md:w-[340px]   custom-md:w-[270px]  custom-md:mr-auto shadow-lg  m-1 p-[0.40rem] cursor-pointer  '>
 
       {/* card image */}
       <img  src={thumbnails?.medium?.url} alt={thumbnails}/>
@@ -69,6 +70,7 @@ const VideoCard = ({videoInfo}) => {
 
       
     </div>
+    
   )
 }
 
