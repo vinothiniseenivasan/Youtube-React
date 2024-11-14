@@ -4,10 +4,16 @@ import { useState } from 'react';
 
 const LoadComment = ({ commentFull }) => {
     const { authorDisplayName, authorProfileImageUrl, textDisplay, updatedAt, likeCount } = commentFull;
+   console.log("LoadComment" ,commentFull)
+
   
     const time = useGetTime({ timeStamp: updatedAt });
     // console.log("time" ,time)
     const [imageLoaded, setImageLoaded] = useState(true);
+
+
+
+
 
     function  handleImageError()
     {
@@ -19,7 +25,7 @@ const LoadComment = ({ commentFull }) => {
     }
      
     return (
-        <div className="w-[400px]  mb-4">
+        <div className="w-[500px]  mb-4">
             
             <div className="flex  items-start">
                 <img

@@ -6,11 +6,19 @@ import { useContext } from 'react';
 
 const CommentsList = ({ comment }) => {
 
-    const userComment = useSelector((store) =>(store.comments.inputText) );
-    console.log("useComment" ,userComment)
+   
+
+    //  const isUserEnteredComment  = useSelector((store) =>(store.comments.addedUserComment) );
+
+    //  console.log("isUserEnteredComment" , isUserEnteredComment)
+
+
+    // console.log("useComment" ,userComment)
     if (!comment) {
         return null;
     }
+
+    // console.log("CommentsList" ,comment[0])
 
     
 
@@ -26,14 +34,20 @@ const CommentsList = ({ comment }) => {
 
                
 
-
-                if (!commentFull) return null;
+                        //  console.log("commentFull" ,eachComment)
+                if (!commentFull ) return null;
 
                 return (
-                <LoadComment key={index} commentFull={commentFull} />
-                 );
-           })
-        }
+                    
+                      <LoadComment key={index} commentFull={commentFull} />
+                    ) 
+                }
+                        
+                    
+               
+                 )
+           }
+        
         </div>
     )
 }
