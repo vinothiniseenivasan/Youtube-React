@@ -37,9 +37,10 @@ function App() {
 
 
 
-
+  //  redux root of our app
     <Provider store={appStore}>
     <div> 
+    {/* <RouterProvider router={appRouter} /> */}
             <Head />
             {/* router */}
             <RouterProvider router={appRouter} />

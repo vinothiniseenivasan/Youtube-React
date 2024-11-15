@@ -1,6 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { changeToggleBar } from '../utils/navBarSlice';
+import { Link } from 'react-router-dom';
 
 const Head = () => {
 
@@ -50,12 +51,20 @@ const Head = () => {
            </div>
 
            {/* user information */}
-           <div className='col-span-1'>
+           <div className='col-span-1 flex justify-center items-center'>
+            {/* <img 
+            className='h-8 w-10 mr-10'
+            src='https://w7.pngwing.com/pngs/141/932/png-transparent-custom-home-house-logo-sales-home-angle-building-company.png' alt='home-image'/> */}
+            
+            <div>
             <img  
             className='h-10 mr-5 sm:mr-0'
              src='https://logodix.com/logo/1070634.png' alt='user-info'/>
-            {/* // src='https://yt3.ggpht.com/yti/ANjgQV8kMyK0S_Rd-Wn9wKQmyy6Jwi3ITgVvnXW18jzqgBo=s88-c-k-c0x00ffffff-no-rj' alt='user-info'/> */}
 
+            </div>
+           
+           
+            
            </div>
 
     </div>

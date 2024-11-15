@@ -163,12 +163,10 @@ const Comment = () => {
                    )
                 })
                }
-               {/* <LoadComment  commentFull={totalComment[0]}/>
-               <CommentsList comment = {totalComment[1]} /> */}
+          
             </>
           ) :(<CommentsList comment = {totalComment[0]} />)}
-           {/* <CommentsList comment = {totalComment[0]} /> */}
-        
+           
     </div>
   )
 }

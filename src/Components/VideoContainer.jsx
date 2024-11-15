@@ -19,7 +19,7 @@ const VideoContainer = () => {
     // jsonInfo.items is  array contains 50 videos
     //  we are give this info state variable in order to reset render
     setVideos(jsonInfo?.items);
-     console.log("videos" ,videos)
+    //  console.log("videos" ,videos)
     
   }
 

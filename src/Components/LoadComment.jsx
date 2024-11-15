@@ -1,10 +1,21 @@
 import React from 'react';
 import useGetTime from '../Objects/useGetTime';
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 const LoadComment = ({ commentFull }) => {
+    const userInput = useSelector(store => store?.comments?.addedUserComment);
+    const dispatch = useDispatch();
+
+    // if(userInput)
+    // {
+    //     // already we added one comment so clear for this video
+    //     dispatch(removePreviousVideoComment());
+    // }
+
+
     const { authorDisplayName, authorProfileImageUrl, textDisplay, updatedAt, likeCount } = commentFull;
-   console.log("LoadComment" ,commentFull)
+//    console.log("LoadComment" ,commentFull)
 
   
     const time = useGetTime({ timeStamp: updatedAt });
