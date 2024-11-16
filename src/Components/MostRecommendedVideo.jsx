@@ -1,35 +1,57 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { GOOGLE_API_KEY } from '../utils/constant';
+
+import { Link } from 'react-router-dom';
+
+import VideoPlaying from './VideoPlaying';
+import MostVideoCard from './MostVideoCard';
 
 
 const MostRecommendedVideo = ({channelId}) => {
 
-  // https://youtube.googleapis.com/youtube/v3/playlists?part=snippet%2CcontentDetails&channelId=${channelId}&maxResults=25&key=${GOOGLE_API_KEY}
-  
-  
-  // console.log(${GOOGLE_API_KEY}"channelId in MostRecommendedVideo" ,channelId)
+  const [recommendVideos , setRecommendVideos] = useState([])
+
+  console.log("channelId" ,channelId)
+ 
+  useEffect(()=>{
+    getRecommendedVideo();
+   },[channelId])
 
   async function getRecommendedVideo()
    {
-    // https://corsproxy.io/?
-    const data = await fetch(`https://youtube.googleapis.com/youtube/v3/playlists?part=snippet%2CcontentDetails&channelId=${channelId}&maxResults=25&key=${GOOGLE_API_KEY}`);
+
+     
+     const data = await fetch(`https://youtube.googleapis.com/youtube/v3/playlists?part=snippet%2CcontentDetails&channelId=${channelId}&maxResults=50&key=${GOOGLE_API_KEY}`);
     
 
     const jsonInfo = await data.json();
 
-    console.log("jsonInfo in getRecommendedVideo" ,jsonInfo?.items)
+    //  console.log("jsonInfo in getRecommendedVideo" ,jsonInfo)
+    setRecommendVideos(jsonInfo?.items);
 
 
 
    }
 
 
-    useEffect(()=>{
-        getRecommendedVideo();
-    },[])
+  
   return (
-    <div className='  '>
-        MostRecommendedVideo
+    <div className='flex-col'>
+      {
+       (recommendVideos && 
+
+             recommendVideos.map((eachVideo,index)=>{
+            
+                  return(
+
+                    <VideoPlaying  playlistId ={eachVideo.id} />
+                  )
+   
+             })
+       )
+       
+      }
+       
     </div>
   )
 }

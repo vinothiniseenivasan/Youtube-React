@@ -25,7 +25,7 @@ const WatchPage = () => {
     const movieInfo = YOUTUBE_VIDEOINFO_BYID+(serachParams.get("v"))+"&key="+GOOGLE_API_KEY;
 
     
-
+    // const id = serachParams.get("v");
 
 
 //    
@@ -70,7 +70,8 @@ const WatchPage = () => {
             <WatchPageVideoInfo  videoDetails={videoDetails}/>
         </div>
         <div className='mt-32'>
-            <MostRecommendedVideo channelId={videoDetails?.snippet?.channelId} />
+            <MostRecommendedVideo channelId={ videoDetails?.snippet?.channelId} />
+            
         </div>
     </div>
       )

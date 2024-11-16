@@ -26,7 +26,7 @@ import { useEffect } from "react";
         for (const interval of intervals) {
           const count = Math.floor(secondsAgo / interval.seconds);
           if (count >= 1) {
-            return `${count} ${count > 1 ? 'days' : ''} ago`;
+            return `${count} ${count > 1 ? 'days' : 'day'} ago`;
           }
         }
         return 'just now';

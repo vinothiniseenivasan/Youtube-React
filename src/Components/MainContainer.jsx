@@ -16,7 +16,7 @@ const MainContainer = () => {
       ${(navBarStatus === true) ? "custom-md:ml-6" : "custom-md:mx-auto"}    ${(navBarStatus === true) ? "custom-sm:ml-40" : "custom-sm:mx-auto"}  `} >
 
         <ButtonList />
-        <VideoContainer />
+        <VideoContainer  />
         
     </div>
   )

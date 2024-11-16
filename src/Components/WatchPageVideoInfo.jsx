@@ -12,7 +12,6 @@ const WatchPageVideoInfo = ({videoDetails}) => {
         {
             return
         }
-
     
 
     
@@ -29,12 +28,7 @@ const WatchPageVideoInfo = ({videoDetails}) => {
 
     const views = ((viewCount / 1000000) *100).toFixed(2) ;
     const like = ((likeCount / 1000) ).toFixed(1) ;
-    // ';
-
-    // console.log("snippet" ,snippet)
-    // console.log("statistics" ,statistics)
-
-    //  console.log("snippet" ,title , channelTitle,thumbnails,views,likeCount);
+    
   return (
     <div>
         {/* title */}
