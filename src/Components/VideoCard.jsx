@@ -26,11 +26,7 @@ const VideoCard = ({videoInfo}) => {
 
      const views = (viewCount / 1000000).toFixed(2) + 'K views';
 
-    //  const time = useGetTime({ timeStamp: publishedAt });
-
-
-    // console.log(snippet,statistics)
-    // console.log(thumbnails);
+    
 
   return (
 
@@ -72,6 +68,17 @@ const VideoCard = ({videoInfo}) => {
     </div>
     
   )
+}
+
+
+export const HigherOrder =({videoInfo}) =>{
+
+  console.log("HigherOrder" ,videoInfo)
+  return(<div className='border-red-500  border'>
+
+    <VideoCard videoInfo={videoInfo} />
+
+  </div>)
 }
 
 export default VideoCard

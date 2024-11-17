@@ -64,7 +64,7 @@ const VideoPlaying = ({ playlistId }) => {
     );
 
     const data = await response.json();
-     console.log("voideoPlaying in scroll" ,data)
+    //  console.log("voideoPlaying in scroll" ,data)
     // Append new videos to the existing list
     setVideos((prevVideos) => [...prevVideos, ...(data?.items || [])]);
 

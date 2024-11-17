@@ -1,9 +1,13 @@
+import { useSearchParams } from "react-router-dom";
 import useGetTime from "../Objects/useGetTime";
+import { useState } from "react";
 
 const RecommVideoInfo = ({videoInfo}) => {
        const publishedAt = videoInfo?.snippet?.publishedAt;
   const time = useGetTime({ timeStamp: publishedAt });
-    if(videoInfo === null || videoInfo === undefined)
+  const [imgError ,setImgError] = useState(false);
+
+    if(videoInfo === null || videoInfo === undefined || imgError)
         {
           return null;
         }   
@@ -29,6 +33,13 @@ const views = (randomNumber / 1000000).toFixed(1) + 'M views';
       const {snippet} = videoInfo;
 
      const {title , channelTitle,thumbnails } = snippet;
+   
+
+     function  handleImageError()
+     {
+        
+       setImgError(true)
+     }
     
    
  
@@ -41,6 +52,7 @@ const views = (randomNumber / 1000000).toFixed(1) + 'M views';
                     src={thumbnails?.medium?.url || "fallback-image-url"}
                     alt={`Thumbnail for ${title}`}
                     className="rounded"
+                    onError={()=>handleImageError()}
                   />
                 </div>
         
