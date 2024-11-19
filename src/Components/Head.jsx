@@ -10,6 +10,8 @@ const Head = () => {
 
   const navBarStatus = useSelector((store)=> store.navBar.toggleBar);
   const inputRef =useRef(null);
+
+    const [showSuggestion , setShowSuggestion] = useState(false);
 // get input whatever user search in search bar
   const [inputSerachQuery ,setInputSearchQuery] =useState("");
  const queryInput = useSelector((store)=> store.userInput.query);
@@ -34,17 +36,8 @@ const Head = () => {
 
     console.log("jsonInfo" ,jsonInfo[1]);
     setInputChanges(jsonInfo[1]);
-
     
-
-    // setTimeout(()=>{
-    //   setInputSearchQuery("")
-
-    // },5000)
-
-    //  dispatch(setSuggestions(jsonInfo[1]));
-
-    
+  
   }
 
   useEffect(() =>{
@@ -66,6 +59,10 @@ const Head = () => {
     setInputSearchQuery(e.target.value);  
 
   }
+
+  const handleBlur = () => {
+    setTimeout(() => setShowSuggestion(false), 300);
+  };
 
 
 
@@ -106,7 +103,9 @@ const Head = () => {
             placeholder='search'
             value={inputSerachQuery}
             ref={inputRef}
-            onChange={(e)=>handleOnChange(e)} />
+            onChange={(e)=>handleOnChange(e)}
+            onFocus={()=>{setShowSuggestion(true)}}
+            onBlur={()=>{handleBlur()}}/>
 
             <button className=' p-1 px-2 rounded-r-full border border-gray-500  hover:bg-gray-500 ' >
                 <img src="https://th.bing.com/th/id/OIP.cmKicNaFYKs0z4-eb269_QHaHw?rs=1&pid=ImgDetMain" 
@@ -134,7 +133,7 @@ const Head = () => {
             </div>
            <div>
             {/* Suggestion Box */}
-          { inputChanges.length > 0 && (
+          { showSuggestion &&  inputChanges.length > 0 && (
             <div className="absolute top-[4.5rem] left-[25.3rem] w-[615px] rounded-lg bg-white border border-none shadow-lg">
               <InputSuggestCard inputChanges={inputChanges} />
             </div>
