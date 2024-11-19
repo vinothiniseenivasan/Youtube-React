@@ -71,14 +71,6 @@ const VideoCard = ({videoInfo}) => {
 }
 
 
-export const HigherOrder =({videoInfo}) =>{
 
-  console.log("HigherOrder" ,videoInfo)
-  return(<div className='border-red-500  border'>
-
-    <VideoCard videoInfo={videoInfo} />
-
-  </div>)
-}
 
 export default VideoCard

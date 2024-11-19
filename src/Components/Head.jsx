@@ -1,14 +1,75 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { changeToggleBar } from '../utils/navBarSlice';
 import { Link } from 'react-router-dom';
+import InputSuggestCard from './InputSuggestCard';
+import { setSuggestions } from '../utils/userInputSlice';
 
 const Head = () => {
 
 
   const navBarStatus = useSelector((store)=> store.navBar.toggleBar);
-
+  const inputRef =useRef(null);
+// get input whatever user search in search bar
+  const [inputSerachQuery ,setInputSearchQuery] =useState("");
+ const queryInput = useSelector((store)=> store.userInput.query);
   const dispatch = useDispatch();
+
+  //  get suggestion from api
+  const [inputChanges ,setInputChanges] = useState([]);
+
+  useEffect(() => {
+    if (queryInput) {
+      setInputSearchQuery(queryInput);
+    }
+  }, [queryInput]);
+
+  async function getYoutubeSuggestVideos()
+  {
+
+    // make api call to suggest userInput
+    const data =await fetch(`https://corsproxy.io/?https://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=${inputSerachQuery}`);
+
+    const jsonInfo = await data.json();
+
+    console.log("jsonInfo" ,jsonInfo[1]);
+    setInputChanges(jsonInfo[1]);
+
+    
+
+    // setTimeout(()=>{
+    //   setInputSearchQuery("")
+
+    // },5000)
+
+    //  dispatch(setSuggestions(jsonInfo[1]));
+
+    
+  }
+
+  useEffect(() =>{
+
+     // debouncing
+    const timer = setTimeout(()=>  getYoutubeSuggestVideos() , 200);
+
+    // cleanup
+    return () => clearTimeout(timer);
+
+  } , [inputSerachQuery]);
+
+  
+  
+
+
+  function handleOnChange(e)
+  {
+    setInputSearchQuery(e.target.value);  
+
+  }
+
+
+
+  
   // console.log("navBarStatus" ,navBarStatus)
 
     // it has 3 sections 
@@ -16,7 +77,8 @@ const Head = () => {
     // serach bar
     //  user icon
   return (
-    <div className=' fixed grid grid-flow-col shadow-xl place-items-center w-full  bg-white'>
+    <div className=''>
+  <div className=' fixed grid grid-flow-col shadow-xl place-items-center w-full  bg-white'>
 
 
 
@@ -42,13 +104,21 @@ const Head = () => {
             type="text"
             className='border  border-gray-500 w-[45%] p-2 rounded-l-full ml-[5rem]  md:ml-[4rem]  ' 
             placeholder='search'
-            />
+            value={inputSerachQuery}
+            ref={inputRef}
+            onChange={(e)=>handleOnChange(e)} />
+
             <button className=' p-1 px-2 rounded-r-full border border-gray-500  hover:bg-gray-500 ' >
                 <img src="https://th.bing.com/th/id/OIP.cmKicNaFYKs0z4-eb269_QHaHw?rs=1&pid=ImgDetMain" 
                 className='w-8 h-8  cursor-pointer  '
                 alt="" />
             </button>
            </div>
+
+           {/* input search results */}
+
+           
+           
 
            {/* user information */}
            <div className='col-span-1 flex justify-center items-center'>
@@ -62,13 +132,28 @@ const Head = () => {
              src='https://logodix.com/logo/1070634.png' alt='user-info'/>
 
             </div>
+           <div>
+            {/* Suggestion Box */}
+          { inputChanges.length > 0 && (
+            <div className="absolute top-[4.5rem] left-[25.3rem] w-[615px] rounded-lg bg-white border border-none shadow-lg">
+              <InputSuggestCard inputChanges={inputChanges} />
+            </div>
+          )}
+        </div>
            
            
             
            </div>
+          
 
     </div>
+
+   
+
+  
+    </div>
   )
+
 }
 
-export default Head
+export default Head;

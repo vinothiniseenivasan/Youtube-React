@@ -13,6 +13,8 @@ import MostRecommendedVideo from './MostRecommendedVideo';
 const WatchPage = () => {
     const dispatch = useDispatch();
     const navBarStatus = useSelector((store)=> store.navBar.toggleBar);
+
+    // const queryInput = useSelector((store)=> store.userInput.query);
     // we are getting params for each video we can get it by using usePArams()
     // we getting after v ==> OXe7N7-xMKM
 
