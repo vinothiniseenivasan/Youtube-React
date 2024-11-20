@@ -5,7 +5,7 @@ createSlice({
         name : "search" ,
    
    initialState:{
-      suggestCard : { }
+      
   }  ,
 
    reducers: {

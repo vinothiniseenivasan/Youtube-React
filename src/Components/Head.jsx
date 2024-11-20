@@ -1,16 +1,19 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { changeToggleBar } from '../utils/navBarSlice';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import InputSuggestCard from './InputSuggestCard';
-import { setSuggestions } from '../utils/userInputSlice';
+// import { setSuggestions } from '../utils/userInputSlice';
+import { getInformationFromApi} from '../utils/storeSuggestionApi';
+
 
 const Head = () => {
 
-
-  const navBarStatus = useSelector((store)=> store.navBar.toggleBar);
-  const inputRef =useRef(null);
-
+  // get search query from redux to check if already present or not iphone:["i" ,"ip"]
+  const query = useSelector(store => store.search);
+  // console.log("query for api" ,query)
+  // const navBarStatus = useSelector((store)=> store.navBar.toggleBar);
+ 
     const [showSuggestion , setShowSuggestion] = useState(false);
 // get input whatever user search in search bar
   const [inputSerachQuery ,setInputSearchQuery] =useState("");
@@ -24,26 +27,58 @@ const Head = () => {
     if (queryInput) {
       setInputSearchQuery(queryInput);
     }
+    else
+    {
+      setInputSearchQuery("");
+
+    }
   }, [queryInput]);
 
   async function getYoutubeSuggestVideos()
   {
+
+    // console.log("Api call of" , inputSerachQuery)
 
     // make api call to suggest userInput
     const data =await fetch(`https://corsproxy.io/?https://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=${inputSerachQuery}`);
 
     const jsonInfo = await data.json();
 
-    console.log("jsonInfo" ,jsonInfo[1]);
+    // console.log("jsonInfo" ,jsonInfo[1]);
+
     setInputChanges(jsonInfo[1]);
+    // store in redux api results
+    dispatch(getInformationFromApi({
+      [inputSerachQuery] : jsonInfo[1]
+    }
+     
+    ))
     
   
   }
 
   useEffect(() =>{
 
+
+
+   
+
      // debouncing
-    const timer = setTimeout(()=>  getYoutubeSuggestVideos() , 200);
+    const timer = setTimeout(()=>
+    {
+      // if the query already present no need to make api call just return it
+
+      if(query[inputSerachQuery])
+        {
+          setInputChanges(query[inputSerachQuery]);
+         
+        }
+        else{
+          // make api call
+          getYoutubeSuggestVideos() 
+        }
+    } ,200);
+      
 
     // cleanup
     return () => clearTimeout(timer);
@@ -102,7 +137,6 @@ const Head = () => {
             className='border  border-gray-500 w-[45%] p-2 rounded-l-full ml-[5rem]  md:ml-[4rem]  ' 
             placeholder='search'
             value={inputSerachQuery}
-            ref={inputRef}
             onChange={(e)=>handleOnChange(e)}
             onFocus={()=>{setShowSuggestion(true)}}
             onBlur={()=>{handleBlur()}}/>

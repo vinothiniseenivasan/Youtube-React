@@ -7,11 +7,17 @@ import VideoCard, { HigherOrder } from './VideoCard';
 import { Link } from 'react-router-dom';
 import { GOOGLE_API_KEY } from '../utils/constant';
 import { useCallback } from 'react';
+import { useSelector } from 'react-redux';
 
 
 const VideoContainer = () => {
 
+   const queryInput = useSelector(store => store?.userInput?.query);
 
+
+  //  const [userQuery ,setUserQuery] = useState(queryInput);
+ 
+    console.log("queryInput" ,queryInput)
 
     const [loading,setLoading] = useState(false);
 
@@ -29,24 +35,38 @@ const VideoContainer = () => {
 
     // loading is true
     setLoading(true);
-  // set 1 min delay
-  // await new Promise((resolve)=> setTimeout(resolve, 1000));
+    // setUserQuery(queryInput)
+ 
+     let data;
+    
+    // setUserQuery(queryInput)
+    data =(queryInput !== "")?await fetch(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=${queryInput}&key=${GOOGLE_API_KEY}&pageToken=${pageToken}`)
+    :   await fetch(`https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=50&regionCode=IN&key=${GOOGLE_API_KEY}&pageToken=${pageToken}`);
 
 
+    
   // get data and next page information from data.nextPageToken
-  const data = await fetch(`https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=50&regionCode=IN&key=${GOOGLE_API_KEY}&pageToken=${pageToken}`);
-
-
+ 
+ 
     const jsonInfo = await data?.json();
-    // console.log("jsonInfo" ,jsonInfo?.items);
+     console.log("jsonInfo" ,jsonInfo);
 
     // jsonInfo.items is  array contains 50 videos
     //  we are give this info state variable in order to reset render
     // COMBINE DATA WITH PREV ITEM
-    setVideos((prev)=>[...prev , ...jsonInfo?.items]);
+    if(jsonInfo?.items)
+    {
+      setVideos((prev)=>[...prev , ...jsonInfo?.items]);
+    }
+   
+
+   
 
     // getextPage Information
     setNextPageToken(jsonInfo?.nextPageToken || null);
+    
+    console.log("jsonInfo" ,jsonInfo?.items[0]);
+   
 
     setLoading(false);
 
@@ -57,8 +77,11 @@ const VideoContainer = () => {
   
 
   useEffect(()=>{
+    
+    setVideos([]); // Reset videos when the query changes
+    setNextPageToken(null); // Reset pagination
     getMoreVideos(); 
-  },[]);
+  },[queryInput]);
 
   const handleScroll = useCallback(() => {
     if (
@@ -78,22 +101,49 @@ const VideoContainer = () => {
 
   
   // console.log("videos in videoContainer" ,videos)
+  //   { watchId ={eachVideo?.id?.videoId? (eachVideo?.id?.videoId) : eachVideo?.id}}
+   let watchId; 
 
   return (
    <div className='flex flex-wrap  gap-2 '>
+     
+     
     
         {
-         
-        (   videos &&  videos.map((eachVideo , index)=>(
-         
-            <Link to={"/watch?v=" + eachVideo.id}>
-                
-            <VideoCard key={eachVideo.id} videoInfo = {eachVideo} />
-           
-            </Link>
 
-          )) )
-        }
+           videos &&  videos.map((eachVideo , index)=>{
+           
+             let watchId;
+             if(queryInput)
+             {
+              watchId = eachVideo?.id?.videoId;
+              if(watchId === undefined)
+              {
+                return null;
+              }
+             }
+            else
+            {
+              watchId=eachVideo?.id;
+            }
+            
+            return( 
+            <Link to={"/watch?v=" + watchId}>
+                
+                 <VideoCard key={eachVideo.id} videoInfo = {eachVideo} />
+           
+                 </Link>
+                ) })
+            
+          
+          } 
+
+        
+
+        
+
+           
+        
        
     </div>
    )

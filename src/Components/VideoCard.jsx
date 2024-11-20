@@ -1,10 +1,11 @@
 import React from 'react';
 import useGetTime from '../Objects/useGetTime';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const VideoCard = ({videoInfo}) => {
 
-
+  const queryInput = useSelector(store => store.userInput.query);
  
 
   const publishedAt = videoInfo?.snippet?.publishedAt;
@@ -18,11 +19,30 @@ const VideoCard = ({videoInfo}) => {
   }
 
     // console.log("videoInfo" ,videoInfo)
-     const {snippet, statistics} = videoInfo;
+     const {snippet} = videoInfo;
+     if(!queryInput)
+     {
+        let  {statistics} = videoInfo;
+        if(statistics)
+        {
+          var {viewCount } = statistics;
+        }
+        else
+        {
+          viewCount = 1000000*4
+        }
+      
+      
+     }
+     else
+     {
+    
+        viewCount = 1000000*4
+     }
 
      const {title , channelTitle,thumbnails } = snippet;
 
-     const {viewCount } = statistics;
+    
 
      const views = (viewCount / 1000000).toFixed(2) + 'K views';
 

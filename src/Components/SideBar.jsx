@@ -1,11 +1,32 @@
 import React from 'react';
 import { sidebarObj } from '../Objects/sidebarObj';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+// import { useSelector } from 'react-redux';
+import { setSuggestions } from '../utils/userInputSlice';
+import VideoContainer from './VideoContainer';
+import Head from './Head';
 
 const SideBar = () => {
+  // const queryInput = useSelector((store)=> store.userInput.query);
     
   const navBarStatus = useSelector( (store)=> store.navBar.toggleBar );
+  const dispatch=useDispatch();
+
+  function handleClick(title)
+   {
+    if(title === "Home")
+    {
+      dispatch(setSuggestions(""));
+      
+      <VideoContainer />
+     
+      
+    
+       
+    }
+
+  }
 
 
   return (
@@ -29,8 +50,8 @@ const SideBar = () => {
                             { 
                              eachSideBar.items.map( (eachSubTitle , index)=>(
 
-                            
-
+                               
+                                
                               <Link to={eachSubTitle.label === "Home" ? "/" : " "}>
                                    {/* {console.log("eachSubTitle" ,eachSubTitle)} */}
                              
@@ -42,7 +63,8 @@ const SideBar = () => {
 
 
                              {/* // subtitle */}
-                            <h3 className=' ml-4 sm:ml-6 text-gray-600 font-light sm:font-normal tracking-normal  sm:tracking-wide  '>
+                       <h3 className=' ml-4 sm:ml-6 text-gray-600 font-light sm:font-normal tracking-normal  sm:tracking-wide  '
+                            onClick={()=>handleClick(eachSubTitle.label)}>
                                 {eachSubTitle.label}
                             </h3>
                      

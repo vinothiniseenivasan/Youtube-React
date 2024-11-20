@@ -145,6 +145,8 @@ const Comment = () => {
                     </div>
                 </div>
             </div>
+
+          {  console.log("totalComment" , totalComment)}
            {userInput ? (
             <>
 
