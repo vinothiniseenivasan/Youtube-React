@@ -2,10 +2,13 @@ import React from 'react';
 import useGetTime from '../Objects/useGetTime';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import Button from './Button';
 
 const VideoCard = ({videoInfo}) => {
 
   const queryInput = useSelector(store => store.userInput.query);
+  
+  const isLive = useSelector(store => store?.live?.hasLive);
  
 
   const publishedAt = videoInfo?.snippet?.publishedAt;
@@ -44,7 +47,7 @@ const VideoCard = ({videoInfo}) => {
 
     
 
-     const views = (viewCount / 1000000).toFixed(2) + 'K views';
+     const views = (!isLive) ? ((viewCount / 1000000).toFixed(2) + 'K views') :((viewCount / 1000000).toFixed(1));
 
     
 
@@ -74,9 +77,22 @@ const VideoCard = ({videoInfo}) => {
       {/* views and published */}
 
       <span className='flex justify-start items-start ml-12 mt-[0.25rem] '>
-        <span className=''>{views}</span>
-        <span className='ml-4'>&bull;</span>
-        <span>{time}</span>
+        {!isLive  ?
+          <> (<span className=''>{views}</span>
+          <span className='ml-4'>&bull;</span>
+          <span>{time}</span>) </>
+           :
+           <div className='flex-col'>
+
+             <span className='text-sm font-normal'>{views}k Watching</span>
+              {/* <span className='ml-4'>&bull;</span> */}
+             <div className='border border-red-500 text-white bg-red-500 flex items-center justify-center p-1 rounded-lg'>
+              
+               Live
+             
+              </div>
+           </div>
+        }
 
       </span>
 

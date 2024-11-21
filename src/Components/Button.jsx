@@ -1,10 +1,32 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { mainContainerButton } from '../Objects/mainContainerButton';
 import "../css/button.css";
+import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import {offLiveSlice, onLiveSlice} from "../utils/liveSlice"
 
 const Button = () => {
 
     const containerRef = useRef(null);
+
+    const [isLive ,setIsLive] = useState(false);
+
+    const dispatch = useDispatch();
+
+    function handleLive(eachButton)
+    {
+     if(eachButton.label === "Live"){
+      setIsLive(true);
+       dispatch(onLiveSlice())
+
+     }
+     else
+     {
+      setIsLive(false);
+       dispatch(offLiveSlice())
+     }
+     console.log("isLive" ,eachButton)
+    }
      
 
     const scrollToLeft = () => {
@@ -47,15 +69,24 @@ const Button = () => {
                 >
                      {            
                        mainContainerButton.map((eachButton) =>(
+                       
+
+
 
                           <div
+                          // {console.log(eachButton)}
                             
                              className='border flex-shrink-0 bg-gray-200  rounded-md flex justify-start items-center sm:p-[0.2rem]   md:p-[0.4rem] ml-5 mt-3 font-thin
                              hover:bg-black hover:text-white'
+                             onClick={()=>{ handleLive(eachButton)  } }
                              
                              >
-     
-                              <span className=' font-semibold'>{ eachButton.label }</span>
+                               {
+                                (isLive) ? <Link to={"/live"}>
+                                   <span className=' font-semibold'>{ eachButton.label }</span>
+                                </Link> :  <span className=' font-semibold'>{ eachButton.label }</span>
+                               }
+                             
                            </div>
       
                         ))

@@ -5,6 +5,7 @@ import appStore from "./utils/appStore";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import MainContainer from "./Components/MainContainer";
 import WatchPage from "./Components/WatchPage";
+import Live from "./Components/Live";
 
 
 function App() {
@@ -26,6 +27,11 @@ function App() {
         path: "/watch" ,
         element:<WatchPage />
       },
+      {
+        path: "/live" ,
+        element:<Live />
+      },
+
 
     ]
       

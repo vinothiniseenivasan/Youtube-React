@@ -14,10 +14,16 @@ const VideoContainer = () => {
 
    const queryInput = useSelector(store => store?.userInput?.query);
 
+   const isLive = useSelector(store => store?.live?.hasLive);
+  console.log("isLive in VideoContainer" , isLive);
+
+
+  const [live ,setLive] = useState(false);
+
 
   //  const [userQuery ,setUserQuery] = useState(queryInput);
  
-    console.log("queryInput" ,queryInput)
+    // console.log("queryInput" ,queryInput)
 
     const [loading,setLoading] = useState(false);
 
@@ -28,8 +34,24 @@ const VideoContainer = () => {
 
 
     
-
+// 
   const [videos ,setVideos] = useState([]);
+
+
+  async function  getLiveVideos(pageToken="")
+  {
+    // const data = await fetch(`https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=50&regionCode=IN&key=${GOOGLE_API_KEY}`);
+    const data = await fetch(`https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=50&regionCode=US&key=${GOOGLE_API_KEY}&pageToken=${pageToken}`)
+
+    const jsonInfo = await data?.json();
+
+     console.log("jsonInfo in Live" ,jsonInfo)
+
+    setVideos(jsonInfo?.items);
+
+  }
+    
+  
 
   async function getMoreVideos(pageToken = "") {
 
@@ -40,7 +62,7 @@ const VideoContainer = () => {
      let data;
     
     // setUserQuery(queryInput)
-    data =(queryInput !== "")?await fetch(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=${queryInput}&key=${GOOGLE_API_KEY}&pageToken=${pageToken}`)
+     data =(queryInput !== "")?await fetch(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=${queryInput}&key=${GOOGLE_API_KEY}&pageToken=${pageToken}`)
     :   await fetch(`https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=50&regionCode=IN&key=${GOOGLE_API_KEY}&pageToken=${pageToken}`);
 
 
@@ -49,7 +71,7 @@ const VideoContainer = () => {
  
  
     const jsonInfo = await data?.json();
-     console.log("jsonInfo" ,jsonInfo);
+    //  console.log("jsonInfo" ,jsonInfo);
 
     // jsonInfo.items is  array contains 50 videos
     //  we are give this info state variable in order to reset render
@@ -65,7 +87,7 @@ const VideoContainer = () => {
     // getextPage Information
     setNextPageToken(jsonInfo?.nextPageToken || null);
     
-    console.log("jsonInfo" ,jsonInfo?.items[0]);
+    // console.log("jsonInfo" ,jsonInfo?.items[0]);
    
 
     setLoading(false);
@@ -80,8 +102,8 @@ const VideoContainer = () => {
     
     setVideos([]); // Reset videos when the query changes
     setNextPageToken(null); // Reset pagination
-    getMoreVideos(); 
-  },[queryInput]);
+        {( isLive === false)  ? (getMoreVideos()) : getLiveVideos()}
+  },[queryInput , isLive]);
 
   const handleScroll = useCallback(() => {
     if (

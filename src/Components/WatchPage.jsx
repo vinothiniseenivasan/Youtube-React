@@ -13,6 +13,7 @@ import MostRecommendedVideo from './MostRecommendedVideo';
 const WatchPage = () => {
     const dispatch = useDispatch();
     const navBarStatus = useSelector((store)=> store.navBar.toggleBar);
+    const isLive = useSelector(store => store?.live?.hasLive);
 
     // const queryInput = useSelector((store)=> store.userInput.query);
     // we are getting params for each video we can get it by using usePArams()
@@ -69,10 +70,11 @@ const WatchPage = () => {
             width= {`${(navBarStatus === true) ? "1300" : "1400" }`}
             height="650" src={`https://www.youtube.com/embed/${serachParams.get("v")}?si=F7L5TwrLVtbwQJJQ`} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
     
-            <WatchPageVideoInfo  videoDetails={videoDetails}/>
+           <WatchPageVideoInfo  videoDetails={videoDetails}/>
         </div>
         <div className='mt-32'>
-            <MostRecommendedVideo channelId={ videoDetails?.snippet?.channelId} />
+           { ((!isLive) ?  <MostRecommendedVideo channelId={ videoDetails?.snippet?.channelId} /> : " ")}
+           
             
         </div>
     </div>

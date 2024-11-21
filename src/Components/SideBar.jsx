@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { setSuggestions } from '../utils/userInputSlice';
 import VideoContainer from './VideoContainer';
 import Head from './Head';
+import { offLiveSlice } from '../utils/liveSlice';
 
 const SideBar = () => {
   // const queryInput = useSelector((store)=> store.userInput.query);
@@ -13,11 +14,14 @@ const SideBar = () => {
   const navBarStatus = useSelector( (store)=> store.navBar.toggleBar );
   const dispatch=useDispatch();
 
+
+
   function handleClick(title)
    {
     if(title === "Home")
     {
       dispatch(setSuggestions(""));
+      dispatch(offLiveSlice());
       
       <VideoContainer />
      
