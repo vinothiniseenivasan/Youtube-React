@@ -18,7 +18,7 @@ const VideoContainer = () => {
   console.log("isLive in VideoContainer" , isLive);
 
 
-  const [live ,setLive] = useState(false);
+
 
 
   //  const [userQuery ,setUserQuery] = useState(queryInput);
@@ -40,8 +40,12 @@ const VideoContainer = () => {
 
   async function  getLiveVideos(pageToken="")
   {
-    // const data = await fetch(`https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=50&regionCode=IN&key=${GOOGLE_API_KEY}`);
-    const data = await fetch(`https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=50&regionCode=US&key=${GOOGLE_API_KEY}&pageToken=${pageToken}`)
+    
+    let data;
+    
+    // setUserQuery(queryInput)
+     data =(queryInput !== "")?await fetch(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=${queryInput}&key=${GOOGLE_API_KEY}&pageToken=${pageToken}`)
+    :   await fetch(`https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=50&regionCode=US&key=${GOOGLE_API_KEY}&pageToken=${pageToken}`);
 
     const jsonInfo = await data?.json();
 
@@ -98,12 +102,25 @@ const VideoContainer = () => {
 
   
 
-  useEffect(()=>{
-    
+  
+
+
+  useEffect(() => {
+    if (isLive === undefined || queryInput === undefined) {
+      // Do nothing until both states are resolved
+      return;
+    }
+  
     setVideos([]); // Reset videos when the query changes
     setNextPageToken(null); // Reset pagination
-        {( isLive === false)  ? (getMoreVideos()) : getLiveVideos()}
-  },[queryInput , isLive]);
+  
+    if (isLive === false) {
+      getMoreVideos();
+    } else {
+      getLiveVideos();
+    }
+  }, [queryInput, isLive]);
+  
 
   const handleScroll = useCallback(() => {
     if (
@@ -128,10 +145,7 @@ const VideoContainer = () => {
 
   return (
    <div className='flex flex-wrap  gap-2 '>
-     
-     
-    
-        {
+         {
 
            videos &&  videos.map((eachVideo , index)=>{
            

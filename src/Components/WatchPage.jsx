@@ -7,6 +7,7 @@ import {  GOOGLE_API_KEY } from '../utils/constant';
 import WatchPageVideoInfo from './WatchPageVideoInfo';
 import { useSelector } from 'react-redux';
 import MostRecommendedVideo from './MostRecommendedVideo';
+import LiveChat from './LiveChat';
 
 
 
@@ -73,7 +74,7 @@ const WatchPage = () => {
            <WatchPageVideoInfo  videoDetails={videoDetails}/>
         </div>
         <div className='mt-32'>
-           { ((!isLive) ?  <MostRecommendedVideo channelId={ videoDetails?.snippet?.channelId} /> : " ")}
+           { ((!isLive) ?  <MostRecommendedVideo channelId={ videoDetails?.snippet?.channelId} /> : <LiveChat />)}
            
             
         </div>

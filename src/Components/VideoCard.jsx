@@ -46,7 +46,6 @@ const VideoCard = ({videoInfo}) => {
      const {title , channelTitle,thumbnails } = snippet;
 
     
-
      const views = (!isLive) ? ((viewCount / 1000000).toFixed(2) + 'K views') :((viewCount / 1000000).toFixed(1));
 
     
@@ -54,7 +53,7 @@ const VideoCard = ({videoInfo}) => {
   return (
 
   
-    <div className='custom-lg:ml-6 h-[320px]  custom-lg:w-[360px] custom-sm-md:w-[340px]   custom-md:w-[270px]  custom-md:mr-auto shadow-lg  m-1 p-[0.40rem] cursor-pointer  '>
+    <div className={`custom-lg:ml-6 ${(isLive) ? 'h-[330px]' : 'h-[328px]'}  custom-lg:w-[360px] custom-sm-md:w-[340px]   custom-md:w-[270px]  custom-md:mr-auto   m-1 p-[0.40rem] cursor-pointer  `}>
 
       {/* card image */}
       <img  src={thumbnails?.medium?.url} alt={thumbnails}/>
@@ -71,7 +70,8 @@ const VideoCard = ({videoInfo}) => {
       {/* title */}
       <div className='font-[180]  mt-[0.15rem] leading-none '>
   
-           <span className='ml-12'>{channelTitle}</span>
+           <span className='ml-12 font-normal'>{channelTitle}</span>
+
      
 
       {/* views and published */}
@@ -84,9 +84,9 @@ const VideoCard = ({videoInfo}) => {
            :
            <div className='flex-col'>
 
-             <span className='text-sm font-normal'>{views}k Watching</span>
+             <span className='text-sm font-normal opacity-70 '>{views}k Watching</span>
               {/* <span className='ml-4'>&bull;</span> */}
-             <div className='border border-red-500 text-white bg-red-500 flex items-center justify-center p-1 rounded-lg'>
+             <div className=' mt-2 border border-red-600 text-white bg-red-500 flex items-center justify-center p-1 rounded-lg'>
               
                Live
              

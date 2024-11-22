@@ -2,8 +2,11 @@ import React, { useState } from 'react'
 import Comment from './Comment'
 import { useDispatch } from 'react-redux';
 import { addComment } from '../utils/commentSlice';
+import { useSelector } from 'react-redux';
 
 const Description = ({time , description ,views}) => {
+
+  const isLive = useSelector(store => store?.live?.hasLive);
 
     // console.log(description);
 
@@ -34,7 +37,7 @@ const Description = ({time , description ,views}) => {
         
   </div>
 
-      <Comment />
+    {!isLive ? (<Comment />) : " "}  
       </>
   )
 }

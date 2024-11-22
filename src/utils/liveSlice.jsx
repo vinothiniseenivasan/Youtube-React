@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit"
 const liveSlice = createSlice({
     name:"live" ,
     initialState:{
-        hasLive : "false"
+        hasLive : false
     },
     reducers:{
         onLiveSlice:(state,action)=>{

@@ -21,8 +21,8 @@ const MainContainer = () => {
          className={ ` mt-32  custom-sm:w-[40%] custom-sm-md:ml-[16rem] custom-lg:w-[82%] custom-md:w-[75%]      ${(navBarStatus === true) ? "lg:ml-72" : "lg:mx-auto   "} 
           ${(navBarStatus === true) ? "custom-md:ml-6" : "custom-md:mx-auto"}    ${(navBarStatus === true) ? "custom-sm:ml-40" : "custom-sm:mx-auto"}    `} >
 
-            <ButtonList />
-           <VideoContainer  />
+          <ButtonList />
+          <VideoContainer  />
         
     </div>
   
