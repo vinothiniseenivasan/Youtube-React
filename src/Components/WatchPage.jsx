@@ -73,7 +73,7 @@ const WatchPage = () => {
     
            <WatchPageVideoInfo  videoDetails={videoDetails}/>
         </div>
-        <div className='mt-32'>
+        <div className={`mt-32  ${isLive ?'border border-gray-400 h-[650px] mr-3 ml-2 bg-gray-50 m-2 rounded-lg' : 'border-none' } w-full `}>
            { ((!isLive) ?  <MostRecommendedVideo channelId={ videoDetails?.snippet?.channelId} /> : <LiveChat />)}
            
             
