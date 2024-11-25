@@ -13,9 +13,12 @@ import { useSelector } from 'react-redux';
 const VideoContainer = () => {
 
    const queryInput = useSelector(store => store?.userInput?.query);
+   console.log("queryInput in VideoContainer"  , queryInput)
 
    const isLive = useSelector(store => store?.live?.hasLive);
   console.log("isLive in VideoContainer" , isLive);
+
+  const navBarStatus = useSelector((store)=> store.navBar.toggleBar);
 
 
 
@@ -75,15 +78,18 @@ const VideoContainer = () => {
  
  
     const jsonInfo = await data?.json();
-    //  console.log("jsonInfo" ,jsonInfo);
+      console.log("jsonInfo" ,jsonInfo?.items);
+
+        setVideos(jsonInfo?.items);
+    
 
     // jsonInfo.items is  array contains 50 videos
     //  we are give this info state variable in order to reset render
     // COMBINE DATA WITH PREV ITEM
-    if(jsonInfo?.items)
-    {
-      setVideos((prev)=>[...prev , ...jsonInfo?.items]);
-    }
+    // if(jsonInfo?.items)
+    // {
+    //   setVideos((prev)=>[...prev , ...jsonInfo?.items]);
+    // }
    
 
    
@@ -111,7 +117,7 @@ const VideoContainer = () => {
       return;
     }
   
-    setVideos([]); // Reset videos when the query changes
+     setVideos([]); // Reset videos when the query changes
     setNextPageToken(null); // Reset pagination
   
     if (isLive === false) {
@@ -139,15 +145,16 @@ const VideoContainer = () => {
   }, [handleScroll]);
 
   
-  // console.log("videos in videoContainer" ,videos)
-  //   { watchId ={eachVideo?.id?.videoId? (eachVideo?.id?.videoId) : eachVideo?.id}}
+ 
    let watchId; 
 
   return (
-   <div className='flex flex-wrap  gap-2 '>
+   <div className={`flex flex-wrap  gap-2  
+   ${!navBarStatus ? "custom-md:ml-10" : "custom-md:ml-0"} 
+    ${!navBarStatus ? " custom-lg:ml-20" : "custom-lg:ml-0"} mt-4`}>
          {
 
-           videos &&  videos.map((eachVideo , index)=>{
+           videos &&  videos.map((eachVideo )=>{
            
              let watchId;
              if(queryInput)
@@ -164,7 +171,7 @@ const VideoContainer = () => {
             }
             
             return( 
-            <Link to={"/watch?v=" + watchId}>
+            <Link to={"/watch?v=" + watchId} key={eachVideo.id}>
                 
                  <VideoCard key={eachVideo.id} videoInfo = {eachVideo} />
            

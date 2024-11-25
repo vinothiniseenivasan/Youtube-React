@@ -6,6 +6,7 @@ import Button from './Button';
 
 const VideoCard = ({videoInfo}) => {
 
+  const navBarStatus = useSelector((store)=> store.navBar.toggleBar);
   const queryInput = useSelector(store => store.userInput.query);
   
   const isLive = useSelector(store => store?.live?.hasLive);
@@ -53,7 +54,9 @@ const VideoCard = ({videoInfo}) => {
   return (
 
   
-    <div className={`custom-lg:ml-6 ${(isLive) ? 'h-[330px]' : 'h-[328px]'}  custom-lg:w-[360px] custom-sm-md:w-[340px]   custom-md:w-[270px]  custom-md:mr-auto   m-1 p-[0.40rem] cursor-pointer  `}>
+    <div className={`custom-lg:ml-6 ${(isLive) ? 'h-[330px]' : 'h-[328px]'}
+    ${navBarStatus ? "custom-md:w-[270px]" : " ml-2 custom-md:w-[300px]" }
+      custom-lg:w-[360px] custom-sm-md:w-[340px]   custom-md:w-[270px]  custom-md:mr-auto   m-1 p-[0.40rem] cursor-pointer`}>
 
       {/* card image */}
       <img  src={thumbnails?.medium?.url} alt={thumbnails}/>

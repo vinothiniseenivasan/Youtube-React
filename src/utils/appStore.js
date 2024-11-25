@@ -3,7 +3,9 @@ import navBarSliceReucer from "./navBarSlice";
 import commentSliceReducer from "./commentSlice"
 import userInputSliceReducer from "./userInputSlice"
 import storeSuggestionApiReducer   from "./storeSuggestionApi"
-import liveSliceReducer   from "./liveSlice"
+import liveSliceReducer   from "./liveSlice";
+import chatSliceReducer   from "./chatSlice";
+
 
 const appStore = configureStore(
     {
@@ -12,7 +14,8 @@ const appStore = configureStore(
         comments:commentSliceReducer ,
         userInput:userInputSliceReducer,
         search: storeSuggestionApiReducer,
-        live:liveSliceReducer
+        live:liveSliceReducer,
+        chat:chatSliceReducer
        }
      }
 );

@@ -11,14 +11,14 @@ const Head = () => {
 
   // get search query from redux to check if already present or not iphone:["i" ,"ip"]
   const query = useSelector(store => store.search);
-  // console.log("query for api" ,query)
-  // const navBarStatus = useSelector((store)=> store.navBar.toggleBar);
- 
+  
     const [showSuggestion , setShowSuggestion] = useState(false);
+
 // get input whatever user search in search bar
   const [inputSerachQuery ,setInputSearchQuery] =useState("");
  const queryInput = useSelector((store)=> store.userInput.query);
   const dispatch = useDispatch();
+
 
   //  get suggestion from api
   const [inputChanges ,setInputChanges] = useState([]);
@@ -37,8 +37,7 @@ const Head = () => {
   async function getYoutubeSuggestVideos()
   {
 
-    // console.log("Api call of" , inputSerachQuery)
-
+   
     // make api call to suggest userInput
     const data =await fetch(`https://corsproxy.io/?https://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=${inputSerachQuery}`);
 
@@ -58,10 +57,6 @@ const Head = () => {
   }
 
   useEffect(() =>{
-
-
-
-   
 
      // debouncing
     const timer = setTimeout(()=>
@@ -112,9 +107,7 @@ const Head = () => {
     <div className=''>
   <div className=' fixed grid grid-flow-col shadow-xl place-items-center w-full  bg-white'>
 
-
-
-         <div className='flex items-center col-span-4  sm:col-span-1 '>
+    <div className='flex items-center col-span-4  sm:col-span-1 '>
         
                {/*  navbar  */}
             <img 

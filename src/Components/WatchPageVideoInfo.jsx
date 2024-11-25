@@ -34,7 +34,7 @@ const WatchPageVideoInfo = ({videoDetails}) => {
         {/* title */}
       <h1 className=' mt-3 text-xl font-bold tracking-wide leading-snug opacity-85'>{title}</h1> 
       {/* join sub like */}
-      <div className='mt-2 flex'>
+      <div className='mt-2 flex '>
         {/* title and subscribbers */}
           <img src={thumbnails?.medium?.url}  alt="small-thumb"  className="w-9 h-9 rounded-full  "/>
                 <div className='ml-3 flex-col'>
@@ -52,7 +52,7 @@ const WatchPageVideoInfo = ({videoDetails}) => {
                     Subscribe
                  </button>
 
-                 <div className='flex ml-[24rem] items-center'>
+                 <div className='flex custom-lg:ml-[24rem] custom-md:ml-[12rem] items-center'>
                  <button className='flex items-center ml-6 rounded-2xl p-[.20rem] px-2 border-none bg-gray-200 border-gray-400'>
                     <img src={"https://media.istockphoto.com/id/1343145970/vector/thumbs-up-approval-recommend-icon-pixel-perfect-editable-stroke.jpg?s=612x612&w=0&k=20&c=kaHM8YD1K86hE6nuK0XKIAHChTXmldq49O0qeVX8q8Y="}
                      alt="logo"

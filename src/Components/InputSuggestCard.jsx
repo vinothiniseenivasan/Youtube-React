@@ -10,7 +10,7 @@ const InputSuggestCard = ({inputChanges}) => {
     <div className=''>
         {inputChanges.map( (eachSuggest,index) =>
            (
-                <div key={index} className='flex justify-start  items-center hover:bg-gray-100 w-full p-1'
+                <div key={index} className='flex justify-start cursor-pointer  items-center hover:bg-gray-100 w-full p-1'
                       onClick={()=>{dispatch(setSuggestions(eachSuggest))}}>
                     <span>
                         <img 

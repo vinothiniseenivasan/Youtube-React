@@ -90,7 +90,7 @@ const VideoPlaying = ({ playlistId }) => {
   }, [handleScroll]);
 
   return (
-    <div className="video-list">
+    <div className="">
       {videos.map((video, index) => {
         const videoId = video?.snippet?.resourceId?.videoId;
         return (

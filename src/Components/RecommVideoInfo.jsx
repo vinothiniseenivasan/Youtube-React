@@ -44,7 +44,9 @@ const views = (randomNumber / 1000000).toFixed(1) + 'M views';
    
  
     return (
-            <div className="custom-lg:ml-6 custom-lg:w-[380px] custom-sm-md:w-[340px] custom-md:w-[270px] custom-md:mr-auto shadow-lg m-1 p-[0.40rem] cursor-pointer">
+      // custom-lg:ml-10  custom-md:ml-
+            <div className="custom-lg:w-[380px] custom-sm-md:w-[340px] custom-md:w-[340px] c custom-md:mr-auto 
+             shadow-lg m-1 p-[0.40rem] cursor-pointer">
               <div className="flex items-center">
                 {/* Card Image */}
                 <div>
