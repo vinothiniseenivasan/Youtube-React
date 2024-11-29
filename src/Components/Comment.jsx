@@ -151,9 +151,9 @@ const Comment = () => {
             <>
 
                {
-                totalComment.map((eachTotalComment,index)=>
+               totalComment && totalComment?.map((eachTotalComment,index)=>
                 {
-                   if(eachTotalComment.authorDisplayName)
+                   if(eachTotalComment?.authorDisplayName)
                    {
                     return(
                       <LoadComment  commentFull={eachTotalComment}/>

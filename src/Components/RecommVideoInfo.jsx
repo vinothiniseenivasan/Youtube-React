@@ -61,7 +61,7 @@ const views = (randomNumber / 1000000).toFixed(1) + 'M views';
                 {/* Logo and Card Information */}
                 <div className="ml-4 text-wrap w-full flex-col justify-start items-start mt-3">
                   <span className="font-[501]">{title}</span>
-                  <div className="font-[160] mt-[0.15rem] leading-none">
+                  <div className="font-[160] mt-[0.15rem] leading-none ">
                     <span>{channelTitle}</span>
                     
                   </div>

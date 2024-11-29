@@ -18,34 +18,20 @@ const VideoContainer = () => {
    const isLive = useSelector(store => store?.live?.hasLive);
   console.log("isLive in VideoContainer" , isLive);
 
-  const navBarStatus = useSelector((store)=> store.navBar.toggleBar);
+    const navBarStatus = useSelector((store)=> store.navBar.toggleBar);
 
-
-
-
-
-  //  const [userQuery ,setUserQuery] = useState(queryInput);
- 
-    // console.log("queryInput" ,queryInput)
 
     const [loading,setLoading] = useState(false);
-
-   
     const [nextPageToken,setNextPageToken ] = useState(null);
-
-    
-
-
-    
-// 
-  const [videos ,setVideos] = useState([]);
+    const [videos ,setVideos] = useState([]);
 
 
   async function  getLiveVideos(pageToken="")
   {
     
     let data;
-    
+
+   
     // setUserQuery(queryInput)
      data =(queryInput !== "")?await fetch(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=${queryInput}&key=${GOOGLE_API_KEY}&pageToken=${pageToken}`)
     :   await fetch(`https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=50&regionCode=US&key=${GOOGLE_API_KEY}&pageToken=${pageToken}`);
@@ -67,10 +53,11 @@ const VideoContainer = () => {
     // setUserQuery(queryInput)
  
      let data;
-    
-    // setUserQuery(queryInput)
-     data =(queryInput !== "")?await fetch(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=${queryInput}&key=${GOOGLE_API_KEY}&pageToken=${pageToken}`)
+
+    data =(queryInput !== "")?await fetch(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=${queryInput}&key=${GOOGLE_API_KEY}&pageToken=${pageToken}`)
     :   await fetch(`https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=50&regionCode=IN&key=${GOOGLE_API_KEY}&pageToken=${pageToken}`);
+
+
 
 
     
@@ -78,20 +65,18 @@ const VideoContainer = () => {
  
  
     const jsonInfo = await data?.json();
-      console.log("jsonInfo" ,jsonInfo?.items);
+      console.log("jsonInfo" ,jsonInfo);
 
-        setVideos(jsonInfo?.items);
-    
-
+   
     // jsonInfo.items is  array contains 50 videos
     //  we are give this info state variable in order to reset render
     // COMBINE DATA WITH PREV ITEM
-    // if(jsonInfo?.items)
-    // {
-    //   setVideos((prev)=>[...prev , ...jsonInfo?.items]);
-    // }
+    if(jsonInfo?.items)
+    {
+      setVideos((prev)=>[...prev , ...jsonInfo?.items]);
+    }
    
-
+  //  setVideos(jsonInfo?.items)
    
 
     // getextPage Information
@@ -112,10 +97,10 @@ const VideoContainer = () => {
 
 
   useEffect(() => {
-    if (isLive === undefined || queryInput === undefined) {
-      // Do nothing until both states are resolved
-      return;
-    }
+    // if (isLive === undefined || queryInput === undefined) {
+    //   // Do nothing until both states are resolved
+    //   return;
+    // }
   
      setVideos([]); // Reset videos when the query changes
     setNextPageToken(null); // Reset pagination
@@ -145,8 +130,7 @@ const VideoContainer = () => {
   }, [handleScroll]);
 
   
- 
-   let watchId; 
+  console.log("watchId" ,videos)
 
   return (
    <div className={`flex flex-wrap  gap-2  
@@ -154,26 +138,23 @@ const VideoContainer = () => {
     ${!navBarStatus ? " custom-lg:ml-20" : "custom-lg:ml-0"} mt-4`}>
          {
 
+
            videos &&  videos.map((eachVideo )=>{
            
-             let watchId;
-             if(queryInput)
-             {
-              watchId = eachVideo?.id?.videoId;
-              if(watchId === undefined)
-              {
-                return null;
-              }
-             }
-            else
-            {
-              watchId=eachVideo?.id;
+            const watchId =eachVideo?.id?.videoId ||  eachVideo?.id ;
+
+            // console.log("watchId" ,eachVideo)
+        
+            // Skip rendering if watchId is undefined
+            if (!watchId) {
+              return null;
             }
+            
             
             return( 
             <Link to={"/watch?v=" + watchId} key={eachVideo.id}>
                 
-                 <VideoCard key={eachVideo.id} videoInfo = {eachVideo} />
+                 <VideoCard key={eachVideo?.id} videoInfo = {eachVideo} />
            
                  </Link>
                 ) })

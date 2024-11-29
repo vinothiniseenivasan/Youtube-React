@@ -16,6 +16,11 @@ const VideoCard = ({videoInfo}) => {
   const time = useGetTime({ timeStamp: publishedAt });
   //  console.log("time" , time)
 
+  function handleImageError()
+  {
+    return;
+  }
+
   // // early return
   if(!videoInfo)
   {
@@ -59,7 +64,7 @@ const VideoCard = ({videoInfo}) => {
       custom-lg:w-[360px] custom-sm-md:w-[340px]   custom-md:w-[270px]  custom-md:mr-auto   m-1 p-[0.40rem] cursor-pointer`}>
 
       {/* card image */}
-      <img  src={thumbnails?.medium?.url} alt={thumbnails}/>
+      <img  src={thumbnails?.medium?.url} alt={thumbnails} onError={handleImageError()}/>
 
 
 
