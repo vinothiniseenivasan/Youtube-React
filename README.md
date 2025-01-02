@@ -83,7 +83,7 @@ This project uses the following dependencies:
 - **TailwindCSS**: Utility-first CSS framework.
 ## Screenshot
 
-![Screenshot](https://github.com/vinothiniseenivasan/Netflix-/blob/master/Screenshot%202024-10-21%20175856.png?raw=true)
+![Screenshot](https://github.com/vinothiniseenivasan/Youtube-React/blob/master/yt-screen.png?raw=true)
 
 
  **Live Application:**
