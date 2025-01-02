@@ -81,17 +81,9 @@ This project uses the following dependencies:
 - **React Icons**: Icon library for React.
 - **React Router DOM**: Library for routing in React applications.
 - **TailwindCSS**: Utility-first CSS framework.
-**Snapshots:**
-   Here are some screenshots of the application:
+## Screenshot
 
-   ![Home Page](./snapshots/homepage.png)
-   *Home Page*
-
-   ![Video Player](./snapshots/video_player.png)
-   *Video Player*
-
-   ![Search Suggestions](./snapshots/search_suggestions.png)
-   *Search Suggestions*
+![Screenshot](https://github.com/vinothiniseenivasan/Netflix-/blob/master/Screenshot%202024-10-21%20175856.png?raw=true)
 
 
  **Live Application:**
