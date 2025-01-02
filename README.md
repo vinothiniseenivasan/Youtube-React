@@ -82,8 +82,7 @@ This project uses the following dependencies:
 - **React Router DOM**: Library for routing in React applications.
 - **TailwindCSS**: Utility-first CSS framework.
 
-All dependencies are listed in the `package.json` file.
-
----
+ **Live Application:**
+   - Visit the deployed version of this project at: [YouTube Clone Live](https://youtube-react-ashen.vercel.app/)
 
 
